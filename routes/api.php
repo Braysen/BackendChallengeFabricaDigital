@@ -12,4 +12,11 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource("clientes", "ClientesController");
+/* Modificado */
+/*Route::apiResource("clientes", "ClientesController");*/
+Route::group(['middleware' => ['cors']], function () {
+    //Rutas a las que se permitirá acceso
+    Route::apiResource("clientes", "ClientesController");
+});
+
+//Route::apiResource("clientes", "ClientesController");

@@ -88,7 +88,8 @@ class ClientesController extends Controller
 
         echo "Basic Email Sent. Check your inbox.";
 
-        return $clientes;   
+        //return view('/welcome');
+        return redirect('/');
     }
 
     /**
