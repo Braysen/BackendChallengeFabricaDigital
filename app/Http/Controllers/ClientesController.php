@@ -88,7 +88,6 @@ class ClientesController extends Controller
 
         echo "Basic Email Sent. Check your inbox.";
 
-        //return view('/welcome');
         return redirect('/');
     }
 
@@ -121,9 +120,22 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clientes $clientes)
+    public function update(Request $request, int $id)
     {
-        //
+        $clientes = Clientes::find($id);
+
+        $clientes->name = $request->name;
+        $clientes->fatherlastname = $request->fatherlastname;
+        $clientes->motherlastname = $request->motherlastname;
+        $clientes->email = $request->email;
+        $clientes->affair = $request->affair;
+        $clientes->names = $request->names;
+
+        $clientes->update();
+
+        return response()->json([
+            'message' => 'Datos actualizados correctamente'
+        ]);
     }
 
     /**
@@ -132,8 +144,11 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clientes $clientes)
+    public function destroy(int $id)
     {
-        //
+        Clientes::destroy($id);
+        return response()->json([
+            'message' => 'Usuario eliminado correctamente !!'
+        ]);
     }
 }

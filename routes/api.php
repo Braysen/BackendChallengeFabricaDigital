@@ -14,9 +14,17 @@ use Illuminate\Http\Request;
 */
 /* Modificado */
 /*Route::apiResource("clientes", "ClientesController");*/
+/*
 Route::group(['middleware' => ['cors']], function () {
     //Rutas a las que se permitirá acceso
     Route::apiResource("clientes", "ClientesController");
+});*/
+
+//Agrupamos las rutas de nuestra api para que puedan ser consumidas de forma publica
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('clientes/', 'ClientesController@index');
+    Route::post('clientes/', 'ClientesController@store');
+    Route::patch('clientes/{id}','ClientesController@update')->name('clientes.update');
+    Route::delete('clientes/{id}','ClientesController@destroy')->name('clientes.destroy');
 });
 
-//Route::apiResource("clientes", "ClientesController");
