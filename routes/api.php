@@ -12,19 +12,33 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-/* Modificado */
-/*Route::apiResource("clientes", "ClientesController");*/
-/*
-Route::group(['middleware' => ['cors']], function () {
-    //Rutas a las que se permitirá acceso
-    Route::apiResource("clientes", "ClientesController");
-});*/
 
-//Agrupamos las rutas de nuestra api para que puedan ser consumidas de forma publica
-Route::group(['middleware' => 'cors'], function(){
-    Route::get('clientes/', 'ClientesController@index');
-    Route::post('clientes/', 'ClientesController@store');
-    Route::patch('clientes/{id}','ClientesController@update')->name('clientes.update');
-    Route::delete('clientes/{id}','ClientesController@destroy')->name('clientes.destroy');
+
+//Agrupamos las rutas de nuestra api para que puedan ser consumidas de forma privada
+//Route::group(['middleware' => 'auth:api, cors'], function(){ ['cors', 'auth:api']
+Route::group(['middleware' => ['cors','auth:api']], function(){
+    /*Route::get('users/', 'UserController@index');*/
+    Route::patch('users/{id}','UserController@updateProfile')->name('user.updateProfile');
+    Route::delete('users/{id}','UserController@destroyAccount')->name('user.destroyAccount');
+    Route::post('logout/', 'UserController@logout');
 });
 
+//Route::get('users/', 'UserController@index');
+/*
+Route::group(['middleware' => 'cors'], function(){
+    Route::post('crearcuenta','UserController@store');
+    Route::post('login','UserController@login');
+    Route::get('users/', 'UserController@index');
+});*/
+
+//Route::post('crearcuenta','UserController@store');
+//Agrupamos las rutas de nuestra api para que puedan ser consumidas de forma publica
+
+Route::group(['middleware' => 'cors'], function(){
+    //Route::get('users/', 'UserController@index');
+    Route::post('crearcuenta','UserController@store');
+    /*Route::get('clientes/', 'ClientesController@index');*/
+    /*Route::post('users/', 'UserController@store');*/
+    /*
+    Route::delete('users/{id}','UserController@destroy')->name('user.destroy');*/
+});
