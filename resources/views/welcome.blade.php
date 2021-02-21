@@ -1043,7 +1043,7 @@ img{
                 <p>Contact us</p>
                 <br/>
                 <div >
-                    <form method="POST" action="{{ route('clientes.store') }}"  role="form" style="display: grid;">
+                    <form method="POST" action="{{ route('UserController.store') }}"  role="form" style="display: grid;">
                         {{ csrf_field() }}
                         <input type="text" placeholder="Nombre" style="margin-top: 10px;" name="name" id="name"/>
                         <input type="text" placeholder="Apellido Paterno" style="margin-top: 10px;" name="fatherlastname" id="fatherlastname"/>
